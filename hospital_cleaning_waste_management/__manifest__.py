@@ -30,7 +30,7 @@
     'company': "Cybrosys Techno Solutions",
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    "license": "LGPL-3",
+    "license": "AGPL-3",
     'category': 'Hospital',
     'version': '15.0.1.0.0',
     'depends': ['base', 'base_hospital_management', 'hr', 'hospital_cleaning_shifts', 'board',
