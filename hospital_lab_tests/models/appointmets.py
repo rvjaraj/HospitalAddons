@@ -61,6 +61,8 @@ class TestAppointments(models.Model):
     bool = fields.Boolean(default=False)
     payment_status = fields.Char()
     price = fields.Float('Price')
+    is_invoiced = fields.Boolean(string="Is Invoiced",default=False)
+
 
     def _compute_payment_state(self):
         """payment state computation"""
@@ -106,6 +108,7 @@ class TestAppointments(models.Model):
             'invoice_line_ids': inv_line_list
         })
         self.invoice_id = invoice.id
+        self.is_invoiced = True
         return {
             'name': 'Invoice',
             'res_model': 'account.move',

@@ -32,7 +32,7 @@
     'website': "https://www.cybrosys.com",
     "license": "AGPL-3",
     'category': 'Hospital',
-    'version': '15.0.1.0.0',
+    'version': '15.0.1.0.1',
     'depends': ['base_hospital_management', 'hr_contract',
                 'hr_holidays', 'web_domain_field'
                 ],

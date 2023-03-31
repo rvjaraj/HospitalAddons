@@ -13,7 +13,7 @@
                     </button>
                     <button name="action_payment" string="Payment"
                             class="oe_highlight" type="object" attrs="{'invisible':
-                            [('bool', '!=', False)]}">
+                            [('is_invoiced', '=', True)]}">
                     </button>
                     <button name="action_end" string="End Test"
                             class="oe_highlight" type="object" attrs="{'invisible':
@@ -53,6 +53,7 @@
                             <field name="appointment_date"/>
                             <field name="test_type"/>
                              <field name="price"/>
+                            <field name="is_invoiced" invisible="1"/>
                         </group>
                     </group>
 <!--                    <notebook>-->

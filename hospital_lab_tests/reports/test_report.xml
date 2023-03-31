@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-        <report id="test_report"
-                model='lab.result'
-                report_type="qweb-pdf"
-                string="Test Result Report"
-                name="lab_tests.test_result"
-                file="lab_tests.test_result"
-        />
+
+    <record id="test_report" model="ir.actions.report">
+        <field name="name">Lab Report</field>
+        <field name="model">lab.result</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">hospital_lab_tests.test_result</field>
+        <field name="report_file">hospital_lab_tests.test_result</field>
+    </record>
 </odoo>
