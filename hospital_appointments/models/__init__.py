@@ -19,6 +19,5 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-from . import patient_details
 from . import doctors
+from . import patient_details

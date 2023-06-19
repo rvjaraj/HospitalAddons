@@ -59,16 +59,35 @@
                                             </tr>
                                             <tr>
                                                 <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
-                                                     align="center"><t t-esc="patient.patient_name"/>/
+                                                     align="center"><t t-esc="patient.patient_name.name"/>/
                                                     <t t-esc="patient.gender"/>
                                                 </div>
                                             </tr>
                                             <tr>
-                                                <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
-                                                     align="center">
+                                               <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
+                                                     align="center">Phone No:
                                                     <t t-esc="patient.phone"/>
                                                 </div>
                                             </tr>
+                                                <tr>
+                                                <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
+                                                     align="center">Doctor: Dr.
+                                                    <t t-esc="patient.doc_id.name"/>
+                                                </div>
+                                            </tr>
+                                                 <tr>
+                                                <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
+                                                     align="center">Appointment Date:
+                                                    <t t-esc="patient.appointment_date"/>
+                                                </div>
+                                            </tr>
+                                             <tr>
+                                               <div style="font-size:10pt; margin-bottom:0pt;margin-top:0pt;"
+                                                     align="center">Slot:
+                                                    <t t-esc="patient.slot"/>
+                                                </div>
+                                            </tr>
+
                                         </table>
                                     </td>
                                 </table>
@@ -77,9 +96,5 @@
                 </t>
             </t>
         </template>
-
-
     </data>
-
-
 </odoo>

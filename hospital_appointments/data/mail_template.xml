@@ -11,13 +11,11 @@
             <field name="body_html" type="html">
             <div style="margin: 0px; padding: 0px;">
                 <p style="margin: 0px; padding: 0px; font-size: 13px;">
-                    <t t-out="object.patient_name"></t>
+                    Hi <t t-out="object.patient_name.name"></t>,
                     <br /><br />
                     Here is your approval of your appointment with reference
                     <t t-out="object.appointment_seq"></t>
-                    is scheduled on <t t-out="object.time"></t><t t-out="object.pm"></t>
-                    <br /><br />
-                    Date:<t t-out="object.appointment_date"></t>
+                    is scheduled on <t t-out="object.appointment_date"></t>in the time between<t t-out="object.slot"></t>
                     <br /><br />
                     Do not hesitate to contact us if you have any questions.
                 </p>
@@ -27,5 +25,4 @@
             <field name="report_name">Appointment Approval _{{ object.appointment_seq }}</field>
         </record>
     </data>
-
 </odoo>

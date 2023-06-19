@@ -19,18 +19,21 @@
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-from odoo import models, fields
+from odoo import fields, models
 
 
-class Doctor(models.Model):
-    """doctors and details"""
+class HrEmployee(models.Model):
+    """Inherited the employee model to add doctor details"""
     _inherit = 'hr.employee'
 
     doc_seq = fields.Char(string='Doctor Sequence', required=True, copy=False,
                           readonly=True, index=True,
-                          default=lambda self: 'New', help="Doctor Sequence")
+                          default=lambda self: 'New',
+                          help="This field will store the doctor "
+                               "sequence number")
     app_count = fields.Integer('Count', compute='_compute_count',
-                               help="Total Appointment Count")
+                               help="Field will store the total appointment"
+                                    "count")
 
     def open_appointment(self):
         """Appointment  view"""

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="1">
+<!--        Hospital Patient Appointment Sequence-->
         <record id="hospital_appointment_seq" model="ir.sequence">
             <field name="name">Patient Appointment</field>
             <field name="code">patients.appointment</field>

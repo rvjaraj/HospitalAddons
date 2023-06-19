@@ -73,16 +73,6 @@ class ServiceRequest(http.Controller):
         user_obj = request.env.user
         patient_id = kwargs['patient_id']
         appointment_seq = kwargs["appointment_seq"]
-        patient_name = kwargs["patient_name"]
-        age = kwargs["age"]
-        phone = kwargs['phone']
-        email = kwargs['email']
-        appointment_date = kwargs['appointment_date']
-        gender = kwargs['gender']
-        registration_date = date.today()
-        qr_code = kwargs['qr_code']
-        patient = request.env['hospital.appointment'].sudo().search([
-            ('id', '=', int(patient_id))])
         patient_object = request.env['hospital.appointment'].sudo().search([
             ("appointment_seq", "=", appointment_seq)])
         if patient_id:

@@ -21,15 +21,20 @@
 #############################################################################
 {
     'name': "Patient Appointment Management",
-    'summary': """Patient Appointment""",
-    'description': """Patient Appointment""",
+    'summary': """Patient Appointment Management. The module will helps to 
+    create an doctor appointment through the website""",
+    'description': """This module will helps to create the doctor appointment 
+    through the website. The patient can choose the doctor and doctor's slot 
+    from the website form itself. And patient can fill their details for the 
+    appointment. After the submission of appointment, the patient get the 
+    patient card.""",
     'author': "Cybrosys Techno Solutions",
     'company': "Cybrosys Techno Solutions",
     'maintainer': 'Cybrosys Techno Solutions',
     'website': "https://www.cybrosys.com",
-    "license": "AGPL-3",
-    'category': 'Hospital',
-    'version': '15.0.1.0.0',
+    "license": "LGPL-3",
+    'category': 'Website',
+    'version': '15.0.1.0.1',
     'depends': ['website_sale', 'base_hospital_management'],
     'data': ['security/ir.model.access.csv',
              'reports/patient_card.xml',
@@ -39,13 +44,20 @@
              'data/mail_template.xml',
              'data/appointment_cancel_template.xml',
              'data/doctor_seq.xml',
-             'views/hospital_appointments.xml',
-             'views/snippets.xml',
-             'views/website_menu.xml',
-             'views/appointment.xml',
-             'views/thanks.xml',
-             'views/doctor.xml',
+             'views/doctor_appointment_views.xml',
+             'views/doctor_slot_views.xml',
+             'views/hospital_appointments_views.xml',
+             'views/hr_employee_views.xml',
+             'views/patient_form_views.xml',
+             'views/snippets_views.xml',
+             'views/thanks_views.xml',
+             'views/website_menu_views.xml',
              ],
+    'assets': {
+        'web.assets_frontend': [
+            'hospital_appointments/static/src/js/appointment.js',
+        ],
+    },
     'images': ['static/description/banner.png'],
     'installable': True,
     'auto_install': False,
