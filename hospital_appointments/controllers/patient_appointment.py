@@ -3,28 +3,26 @@
 #
 #    Cybrosys Technologies Pvt. Ltd.
 #
-#    Copyright (C) 2022-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
+#    Copyright (C) 2023-TODAY Cybrosys Technologies(<https://www.cybrosys.com>)
 #    Author: Cybrosys Techno Solutions(<https://www.cybrosys.com>)
 #
-#    You can modify it under the terms of the GNU LESSER
-#    GENERAL PUBLIC LICENSE (LGPL v3), Version 3.
+#    You can modify it under the terms of the GNU AFFERO
+#    GENERAL PUBLIC LICENSE (AGPL v3), Version 3.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU LESSER GENERAL PUBLIC LICENSE (LGPL v3) for more details.
+#    GNU AFFERO GENERAL PUBLIC LICENSE (AGPL v3) for more details.
 #
-#    You should have received a copy of the GNU LESSER GENERAL PUBLIC LICENSE
-#    (LGPL v3) along with this program.
+#    You should have received a copy of the GNU AFFERO GENERAL PUBLIC LICENSE
+#    (AGPL v3) along with this program.
 #    If not, see <http://www.gnu.org/licenses/>.
 #
 #############################################################################
-
-from odoo import http
-from odoo.http import request
 import datetime
 from datetime import date
-
+from odoo import http
+from odoo.http import request
 
 selection_field = {'resident': 'Residential',
                    'special': 'Specialist'}
@@ -143,11 +141,12 @@ class ServiceRequest(http.Controller):
         else:
             return request.redirect('/')
 
-    @http.route('/create/appointment/data', methods=['POST', 'GET'], type='http',
+    @http.route('/create/appointment/data', methods=['POST', 'GET'],
+                type='http',
                 auth="public", website=True, csrf=False)
     def submit_final(self, **kw):
         """Patient details"""
-        print(kw,"final kw")
+        print(kw, "final kw")
         if kw:
             patient = request.env['res.partner'].sudo().create({
                 'name': kw.get('patient_name')})
@@ -173,8 +172,8 @@ class ServiceRequest(http.Controller):
             else:
                 period_start = 'pm'
                 period_end = 'pm'
-            slot = str(int(slot.hour_from))+' '+period_start+' : '+str(
-                int(slot.hour_to))+' '+period_end
+            slot = str(int(slot.hour_from)) + ' ' + period_start + ' : ' + str(
+                int(slot.hour_to)) + ' ' + period_end
             vals = {
                 'patient_id': patient.id,
                 "patient_name": patient.id, 'age': age, 'phone': phone,
@@ -210,4 +209,3 @@ class ServiceRequest(http.Controller):
             pdfhttpheaders = [('Content-Type', 'application/pdf'),
                               ('Content-Length', len(pdf))]
             return request.make_response(pdf, headers=pdfhttpheaders)
-

@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/badge/licence-LGPL--3-green.svg
-    :target: https://www.gnu.org/licenses/lgpl-3.0-standalone.html
-    :alt: License: LGPL-3
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :alt: License: AGPL-3
 
 Patient Appointment Management
 ==============================
@@ -13,16 +13,16 @@ Installation
 
 License
 -------
-General Public License, Version 3 (LGPL v3).
+General Public License, Version 3 (AGPL v3).
 (https://www.odoo.com/documentation/user/15.0/legal/licenses/licenses.html)
 
 Company
 -------
-* 'Cybrosys Techno Solutions <https://cybrosys.com/>'__
+* `Cybrosys Techno Solutions <https://cybrosys.com/>`__
 
 Credits
 -------
-* 'Cybrosys Techno Solutions <https://cybrosys.com/>'__
+* `Cybrosys Techno Solutions <https://cybrosys.com/>`__
 Developer: Gayathri V, Chethana Ramachandran
 
 Contacts
