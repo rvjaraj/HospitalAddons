@@ -3,6 +3,8 @@
 
     <menuitem name="Hospital Surgery"
               id="surgery_menu_root"
+              web_icon="hospital_surgery,static/description/icon.png"
+
     />
 
     <menuitem name="Patients"

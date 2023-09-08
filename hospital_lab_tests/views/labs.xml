@@ -15,7 +15,9 @@
 
     <menuitem name="Labs and Tests "
               id="labs_root"
-              sequence="13"/>
+              sequence="13"
+                web_icon="hospital_lab_tests,static/description/icon.png"/>
+
     <menuitem name="Configuration"
               id="hospital_configuration_root"
               parent="labs_root"

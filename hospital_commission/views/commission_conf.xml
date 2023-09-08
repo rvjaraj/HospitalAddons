@@ -19,7 +19,7 @@
             <form>
                 <header>
                     <button name="submit_button" type="object" string="Submit"/>
-                    <field name = 'state' widget="statusbar"/>
+                    <field name='state' widget="statusbar"/>
                 </header>
                 <sheet>
                     <group>
@@ -91,7 +91,8 @@
 
     <menuitem name="Hospital Commission"
               id="hospital_commission_root"
-              sequence="9"/>
+              sequence="9"
+              web_icon="hospital_commission,static/description/icon.png"/>
     <menuitem name="Configuration"
               id="commission_conf_root"
               parent="hospital_commission_root"

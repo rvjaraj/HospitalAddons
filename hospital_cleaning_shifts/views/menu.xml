@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <menuitem name="Shifts"
-              id="employee_shifts"/>
+              id="employee_shifts"
+            web_icon="hospital_cleaning_shifts,static/description/icon.png"/>
 
     <menuitem name="Shifts"
               id="employee_shifts_menu"

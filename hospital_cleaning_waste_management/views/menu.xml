@@ -8,6 +8,8 @@
 
     <menuitem name="Cleaning And Waste Management"
               id="cleaning_menu_root"
+                              web_icon="hospital_cleaning_waste_management,static/description/icon.png"/>
+
     />
     <menuitem name="Team"
               id="cleaning_staff"
