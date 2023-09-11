@@ -22,9 +22,9 @@
                                             <h5 class="list-group-item-heading">
                                                 <t t-esc="employee.job_title"/>
                                             </h5>
-                                            <P class="list-group-item-heading">
-                                                <t t-esc="employee.pin"/>
-                                            </P>
+<!--                                            <P class="list-group-item-heading">-->
+<!--                                                <t t-esc="employee.pin"/>-->
+<!--                                            </P>-->
                                             <ul class="list-group-item-text">
                                                 <li>
                                                     <i class="fa fa-envelope"></i>
