@@ -67,6 +67,7 @@
         'views/lab_test_type.xml',
         'views/hospital_labs.xml',
         'wizard/room_assign.xml',
+        'views/account_details_template.xml',
     ],
     'images': ['static/description/banner.png'],
     'installable': True,
