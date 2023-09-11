@@ -1,0 +1,49 @@
+<odoo>
+    <template id="doctor_kanban_template" name="Doctor List">
+        <t t-call="web.frontend_layout">
+            <div class="container mb-5 mt-4 o_rating_page_submit">
+                <div class="row text-center justify-content-center">
+                    <h1 class="col-12 mt-5">LISTA DE DOCTORES</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <div class="list-group">
+                            <t t-foreach="employees" t-as="employee">
+                                <div class="list-group-item list-group-item-action">
+                                    <div class="row align-items-center">
+                                        <div class="col-4 col-md-3">
+                                            <img t-att-src="image_data_uri(employee.avatar_1920)"
+                                                 style="max-height: 85pt; max-width: 100%;"/>
+                                        </div>
+                                        <div class="col-8 col-md-6">
+                                            <h4 class="list-group-item-heading text-dark">
+                                                <t t-esc="employee.name"/>
+                                            </h4>
+                                            <h5 class="list-group-item-heading">
+                                                <t t-esc="employee.job_title"/>
+                                            </h5>
+                                            <P class="list-group-item-heading">
+                                                <t t-esc="employee.pin"/>
+                                            </P>
+                                            <P class="list-group-item-heading">
+                                                <t t-esc="employee.barcode"/>
+                                            </P>
+                                        </div>
+                                        <div class="col-12 col-md-3 text-right">
+                                            <a t-attf-href="mailto:{{employee.work_email}}"
+                                               class="btn btn-primary btn-sm">Enviar correo
+                                            </a>
+                                            <a t-attf-href="https://wa.me/{{employee.mobile_phone}}"
+                                               class="btn btn-success btn-sm">WhatsApp
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

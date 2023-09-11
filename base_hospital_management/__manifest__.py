@@ -34,7 +34,7 @@
     "license": "AGPL-3",
     'category': 'Hospital',
     'version': '15.0.1.0.0',
-    'depends': ['base', 'hr', 'account', 'sale'],
+    'depends': ['base', 'hr', 'account', 'sale', 'web'],
     'data': [
         'security/ir.model.access.csv',
         'data/patient_prescription_sequence.xml',
@@ -68,6 +68,8 @@
         'views/hospital_labs.xml',
         'wizard/room_assign.xml',
         'views/account_details_template.xml',
+        'views/doctor_controller_template.xml',
+        'views/website_menu.xml',
     ],
     'images': ['static/description/banner.png'],
     'installable': True,
