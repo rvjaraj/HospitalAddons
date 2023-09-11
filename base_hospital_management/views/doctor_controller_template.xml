@@ -25,9 +25,16 @@
                                             <P class="list-group-item-heading">
                                                 <t t-esc="employee.pin"/>
                                             </P>
-                                            <P class="list-group-item-heading">
-                                                <t t-esc="employee.barcode"/>
-                                            </P>
+                                            <ul class="list-group-item-text">
+                                                <li>
+                                                    <i class="fa fa-envelope"></i>
+                                                    <t t-esc="employee.work_email"/>
+                                                </li>
+                                                <li>
+                                                    <i class="fa fa-phone"></i>
+                                                    <t t-esc="employee.mobile_phone"/>
+                                                </li>
+                                            </ul>
                                         </div>
                                         <div class="col-12 col-md-3 text-right">
                                             <a t-attf-href="mailto:{{employee.work_email}}"
