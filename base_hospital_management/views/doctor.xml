@@ -13,13 +13,13 @@
     </record>
 
     <record id="employee_doctor_search" model="ir.ui.view">
-            <field name="name">doctor.search</field>
-            <field name="model">hr.employee</field>
-            <field name="arch" type="xml">
-                <search string="Doctor">
-                   <filter string="Doctor" name="is_doctor" domain="[('is_doctor', '=', 'doctor')]"/>
-                </search>
-            </field>
+        <field name="name">doctor.search</field>
+        <field name="model">hr.employee</field>
+        <field name="arch" type="xml">
+            <search string="Doctor">
+                <filter string="Doctor" name="is_doctor" domain="[('is_doctor', '=', 'doctor')]"/>
+            </search>
+        </field>
     </record>
 
     <record id="doctor_form" model="ir.ui.view">
@@ -34,6 +34,9 @@
             </xpath>
             <xpath expr="//field[@name='mobile_phone']" position="before">
                 <field name="is_doctor" widget="radio" options="{'horizontal': true}"/>
+                <field name="published"/>
+                <field name="title_registration"/>
+                <field name="registration_number"/>
             </xpath>
             <xpath expr="//field[@name='certificate']" position="after">
                 <field name="degrees" widget="many2many_tags" attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>

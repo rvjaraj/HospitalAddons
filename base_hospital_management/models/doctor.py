@@ -45,3 +45,6 @@ class HospitalDoctors(models.Model):
                                       string="Specialization", help="Doctors specialization for an area")
     prescription_ids = fields.One2many('hospital.prescription', 'pharmacy_id', 'Prescription')
     pharmacy_ids = fields.One2many('hospital.pharmacy', 'doctor_id', 'Pharmacy')
+    published = fields.Boolean('Publicar?', default=False)
+    title_registration = fields.Char(string="# Registro Senecyt")
+    registration_number = fields.Char(string="# Registro Trabajo")

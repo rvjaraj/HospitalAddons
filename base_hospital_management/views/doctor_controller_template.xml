@@ -22,9 +22,27 @@
                                             <h5 class="list-group-item-heading">
                                                 <t t-esc="employee.job_title"/>
                                             </h5>
-<!--                                            <P class="list-group-item-heading">-->
-<!--                                                <t t-esc="employee.pin"/>-->
-<!--                                            </P>-->
+                                            <table class="table table-sm">
+                                                <tr>
+                                                    <td>
+                                                        <i class="fa fa-address-card-o"></i>
+                                                        <span>Senecyt</span>
+                                                    </td>
+                                                    <td>
+                                                        <i class="fa fa-credit-card-alt"></i>
+                                                        <span>COD TRABAJO</span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <t t-esc="employee.title_registration"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="employee.registration_number"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
                                             <ul class="list-group-item-text">
                                                 <li>
                                                     <i class="fa fa-envelope"></i>
