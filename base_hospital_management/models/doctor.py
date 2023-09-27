@@ -34,9 +34,9 @@ class DoctorRating(models.Model):
         string='Rating', required=True, default='0')
     review = fields.Text(string='Review')
 
-    _sql_constraints = [
-        ('unique_user_doctor', 'unique(doctor_id, user_id)', 'Solo puede haber una califiación por usuario y doctor'),
-    ]
+    # _sql_constraints = [
+    #     ('unique_user_doctor', 'unique(doctor_id, user_id)', 'Solo puede haber una califiación por usuario y doctor'),
+    # ]
 
 
 class HospitalDoctors(models.Model):
