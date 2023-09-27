@@ -34,6 +34,7 @@
             </xpath>
             <xpath expr="//field[@name='mobile_phone']" position="before">
                 <field name="is_doctor" widget="radio" options="{'horizontal': true}"/>
+                <field name="average_rating" widget="priority" />
                 <field name="published"/>
                 <field name="title_registration"/>
                 <field name="registration_number"/>
@@ -53,6 +54,15 @@
                             <field name="currency_id"
                                    invisible="1"/>
                             <field name="amount_total"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Calificaciones">
+                    <field name="rating_ids">
+                        <tree editable="bottom">
+                            <field name="user_id"/>
+                            <field name="rating" widget="priority" />
+                            <field name="review"/>
                         </tree>
                     </field>
                 </page>

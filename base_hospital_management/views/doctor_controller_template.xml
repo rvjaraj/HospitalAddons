@@ -31,6 +31,12 @@
                                                 <h5 class="list-group-item-heading">
                                                     <t t-esc="employee.job_title"/>
                                                 </h5>
+                                                <span class="float-right " title="Rating" role="img"
+                                                      t-attf-aria-label="Rating: #{employee.average_rating} on 5">
+                                                    <t t-foreach="range(1, 6)" t-as="i">
+                                                        <span t-attf-class="text-warning o_priority_star fa fa-star#{'' if i &lt;= int(employee.average_rating) else '-o'}"/>
+                                                    </t>
+                                                </span>
                                                 <table class="table table-sm">
                                                     <tr>
                                                         <td>
@@ -50,6 +56,7 @@
                                                             <t t-esc="employee.registration_number"/>
                                                         </td>
                                                     </tr>
+
                                                 </table>
 
                                                 <ul class="list-group-item-text">
@@ -72,6 +79,41 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        <t t-if="employee.rating_ids">
+                                            <a href="#" class="toggle-comments-link float-right">Mostrar Comentarios</a>
+                                            <div class="comments-container" style="display: none;">
+                                                <table class="table table-sm">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Usuario</th>
+                                                            <th scope="col">Calificación</th>
+                                                            <th scope="col">Comentario</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <t t-foreach="employee.rating_ids" t-as="rating">
+                                                            <tr>
+                                                                <td>
+                                                                    <t t-esc="rating.user_id.name"/>
+                                                                </td>
+                                                                <td>
+                                                                    <span class="float-right " title="Rating" role="img"
+                                                                          t-attf-aria-label="Rating: #{rating.rating} on 5">
+                                                                        <t t-foreach="range(1, 6)" t-as="i">
+                                                                            <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
+                                                                        </t>
+                                                                    </span>
+                                                                </td>
+                                                                <td>
+                                                                    <t t-esc="rating.review"/>
+                                                                </td>
+                                                            </tr>
+                                                        </t>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </t>
                                     </div>
                                 </t>
                             </div>
