@@ -4,6 +4,8 @@ odoo.define('base_hospital_management.hospital', function (require) {
 
         var toggleCommentsLink = document.querySelector(".toggle-comments-link");
         var commentsContainer = document.querySelector(".comments-container");
+        var toggleCreateLink = document.querySelector(".toggle-crete-link");
+        var commentsForm = document.querySelector(".comments-form");
 
         toggleCommentsLink.addEventListener("click", function (event) {
             event.preventDefault();
@@ -13,6 +15,13 @@ odoo.define('base_hospital_management.hospital', function (require) {
                 commentsContainer.style.display = "none"; // Corregido "noe" a "none"
             }
         });
-        console.log(toggleCommentsLink);
+        toggleCreateLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (commentsForm.style.display === "none") {
+                commentsForm.style.display = "";
+            } else {
+                commentsForm.style.display = "none"; // Corregido "noe" a "none"
+            }
+        });
     });
 });

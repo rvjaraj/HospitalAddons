@@ -41,3 +41,22 @@ class DoctorController(http.Controller):
                 'base_hospital_management.doctor_thanks', vals)
         else:
             return request.redirect('/')
+
+    @http.route('/create/comment', type='http', auth="user", website=True, csrf=False, methods=['POST'])
+    def create_comment(self, **kw):
+        if kw:
+            user = request.env.user
+            doctor_id = int(kw.get(
+                'doctor_id'))
+            rating = int(kw.get('rating'))
+            comment = kw.get('comment')
+            DoctorRating = request.env['doctor.rating']
+            DoctorRating.create({
+                'user_id': user.id,
+                'doctor_id': doctor_id,
+                'rating': str(rating),
+                'review': comment,
+            })
+            return request.redirect('/web/doctors')
+        else:
+            return request.redirect('/')

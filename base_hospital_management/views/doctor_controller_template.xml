@@ -80,7 +80,7 @@
                                             </div>
                                         </div>
                                         <t t-if="employee.rating_ids">
-                                            <a href="#" class="toggle-comments-link float-right">Mostrar Comentarios</a>
+                                            <a href="#" class="toggle-comments-link float-left">Mostrar Comentarios</a>
                                             <div class="comments-container" style="display: none;">
                                                 <table class="table table-sm">
                                                     <thead>
@@ -114,6 +114,25 @@
                                                 </table>
                                             </div>
                                         </t>
+                                        <a href="#" class="toggle-crete-link float-right">Agregar Comentario</a>
+                                        <div class="comments-form" style="display: none;">
+                                            <form id="comment-form" method="post" action="/create/comment">
+                                                <input type="hidden" name="doctor_id"
+                                                       t-att-value="employee.id"/>
+                                                <div class="form-group">
+                                                    <label for="rating">Calificación:</label>
+                                                    <input type="number" class="form-control" id="rating" name="rating"
+                                                           min="1" max="5" required=""/>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="comment">Comentario:</label>
+                                                    <input class="form-control" id="comment" name="comment"
+                                                           rows="3" required=""/>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Enviar Comentario</button>
+                                            </form>
+                                        </div>
+
                                     </div>
                                 </t>
                             </div>
