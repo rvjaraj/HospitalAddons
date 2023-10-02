@@ -70,7 +70,6 @@
         'views/account_details_template.xml',
         'views/doctor_controller_template.xml',
         'views/website_menu.xml',
-        # 'views/template.xml',
     ],
     'assets': {
         'web.assets_frontend': [

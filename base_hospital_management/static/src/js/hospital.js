@@ -1,27 +1,30 @@
-odoo.define('base_hospital_management.hospital', function (require) {
+odoo.define('base_hospital_management.doctor_kanban', function (require) {
     "use strict";
-    $(document).ready(function () {
 
-        var toggleCommentsLink = document.querySelector(".toggle-comments-link");
-        var commentsContainer = document.querySelector(".comments-container");
-        var toggleCreateLink = document.querySelector(".toggle-crete-link");
-        var commentsForm = document.querySelector(".comments-form");
 
-        toggleCommentsLink.addEventListener("click", function (event) {
+    $(function () {
+        $(".toggle-create-link").on("click", function (event) {
+            var $this = $(this);
             event.preventDefault();
-            if (commentsContainer.style.display === "none") {
-                commentsContainer.style.display = "";
-            } else {
-                commentsContainer.style.display = "none"; // Corregido "noe" a "none"
-            }
+            var $commentForm = $(this).closest('.list-group-item').find('.comments-form');
+            $commentForm.toggle();
         });
-        toggleCreateLink.addEventListener("click", function (event) {
+        $(".toggle-comments-link").on('click', function (event) {
+            var $this = $(this);
             event.preventDefault();
-            if (commentsForm.style.display === "none") {
-                commentsForm.style.display = "";
-            } else {
-                commentsForm.style.display = "none"; // Corregido "noe" a "none"
-            }
+            var $commentsContainer = $(this).closest('.list-group-item').find('.comments-container');
+            $commentsContainer.toggle();
+        });
+
+        var $starContainer = $("#star-rating");
+
+        $starContainer.find(".fa-star-o").on("click", function () {
+            $(this).removeClass("fa-star-o").addClass("fa-star");
+            $(this).prevAll().removeClass("fa-star-o").addClass("fa-star");
+            $(this).nextAll().removeClass("fa-star").addClass("fa-star-o");
+            var rating = $(this).data("rating");
+            $("#rating").val(rating);
         });
     });
+
 });

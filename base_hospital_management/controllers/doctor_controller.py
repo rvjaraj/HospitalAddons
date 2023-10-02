@@ -8,7 +8,7 @@ class DoctorController(http.Controller):
     def doctor_kanban(self, **kw):
         employees = request.env['hr.employee'].search([('is_doctor', '=', 'doctor'),
                                                        ('published', '=', True)])
-        return http.request.render('base_hospital_management.doctor_kanban_template', {
+        return request.render('base_hospital_management.doctor_kanban_template', {
             'employees': employees,
         })
 
