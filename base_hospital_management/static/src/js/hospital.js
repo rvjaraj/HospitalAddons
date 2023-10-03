@@ -16,15 +16,20 @@ odoo.define('base_hospital_management.doctor_kanban', function (require) {
             $commentsContainer.toggle();
         });
 
-        var $starContainer = $("#star-rating");
+        $(".star-rating .fa-star-o").on("click", function () {
+            var $star = $(this);
+            var $starContainer = $star.closest(".star-rating");
 
-        $starContainer.find(".fa-star-o").on("click", function () {
-            $(this).removeClass("fa-star-o").addClass("fa-star");
-            $(this).prevAll().removeClass("fa-star-o").addClass("fa-star");
-            $(this).nextAll().removeClass("fa-star").addClass("fa-star-o");
-            var rating = $(this).data("rating");
-            $("#rating").val(rating);
+            $star.removeClass("fa-star-o").addClass("fa-star");
+            $star.prevAll().removeClass("fa-star-o").addClass("fa-star");
+            $star.nextAll().removeClass("fa-star").addClass("fa-star-o");
+
+            var rating = $star.data("rating");
+            console.log(rating);
+            debugger;
+            $starContainer.find(".rating").val(rating);
         });
+
     });
 
 });

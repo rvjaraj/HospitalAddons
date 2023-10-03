@@ -1,151 +1,169 @@
 <odoo>
     <data>
+
+        <template id="comment_template_header" name="Header">
+            <div class="d-flex justify-content-center">
+                <div class="col-2"/>
+                <div class="col-6 justify-content-center">
+                    <h3 class="text-success justify-content-center">LISTA DE DOCTORES</h3>
+                </div>
+                <div class="col-4">
+                    <a href="/doctors" class="btn btn btn-outline-success btn-lg">Registrarte como Doctor
+                    </a>
+                </div>
+            </div>
+            <div class="dropdown-divider m-0"/>
+            <div class="dropdown-divider m-0"/>
+        </template>
+
+        <template id="comment_template_create" name="Crear Comentarios">
+            <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>
+            <div class="dropdown-divider m-0"/>
+            <br/>
+            <div class="comments-form" style="display: none;">
+                <form id="comment-form" method="post" action="/create/comment">
+                    <input type="hidden" name="doctor_id" t-att-value="employee.id"/>
+                    <div class="form-group">
+                        <label for="rating">Calificación:</label>
+                        <span class="fa text-warning star-rating">
+                            <input type="hidden" class="rating" name="rating" value="0" required=""/>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="1"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="2"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="3"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="4"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="5"></span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comentario:</label>
+                        <input class="form-control" id="comment" name="comment" rows="3"
+                               required=""/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Comentario
+                    </button>
+                </form>
+            </div>
+        </template>
+
+        <template id="comment_template_list" name="Listar Comentarios">
+            <t t-if="employee.rating_ids">
+                <a href="#" class="toggle-comments-link float-left">Mostrar
+                    Comentarios
+                </a>
+                <div class="comments-container" style="display: none;">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Calificación</th>
+                                <th scope="col">Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="employee.rating_ids" t-as="rating">
+                                <tr>
+                                    <td>
+                                        <t t-esc="rating.user_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span class="float-right " title="Rating"
+                                              role="img"
+                                              t-attf-aria-label="Rating: #{rating.rating} on 5">
+                                            <t t-foreach="range(1, 6)" t-as="i">
+                                                <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
+                                            </t>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <t t-esc="rating.review"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="comment_template_data" name="Datos Dotor">
+            <div class="row align-items-center">
+                <div class="col-4 col-md-3">
+                    <img t-att-src="image_data_uri(employee.avatar_1920)"
+                         style="max-height: 85pt; max-width: 100%;"/>
+                </div>
+                <div class="col-8 col-md-6">
+                    <h4 class="list-group-item-heading text-dark">
+                        <t t-esc="employee.name"/>
+                    </h4>
+                    <h5 class="list-group-item-heading">
+                        <t t-esc="employee.job_title"/>
+                    </h5>
+                    <span class="float-right " title="Rating" role="img"
+                          t-attf-aria-label="Rating: #{employee.average_rating} on 5">
+                        <t t-foreach="range(1, 6)" t-as="i">
+                            <span t-attf-class="text-warning o_priority_star fa fa-star#{'' if i &lt;= int(employee.average_rating) else '-o'}"/>
+                        </t>
+                    </span>
+                    <table class="table table-sm">
+                        <tr>
+                            <td>
+                                <i class="fa fa-address-card-o"></i>
+                                <span>Senecyt</span>
+                            </td>
+                            <td>
+                                <i class="fa fa-credit-card-alt"></i>
+                                <span>COD TRABAJO</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <t t-esc="employee.title_registration"/>
+                            </td>
+                            <td>
+                                <t t-esc="employee.registration_number"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <ul class="list-group-item-text">
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <t t-esc="employee.work_email"/>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <t t-esc="employee.mobile_phone"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 text-right">
+                    <a t-attf-href="mailto:{{employee.work_email}}"
+                       class="btn btn-primary btn-sm">Enviar correo
+                    </a>
+                    <a t-attf-href="https://wa.me/{{employee.mobile_phone}}"
+                       class="btn btn-success btn-sm">WhatsApp
+                    </a>
+                </div>
+            </div>
+        </template>
+
         <template id="doctor_kanban_template" name="Lista De Doctores">
             <t t-call="web.frontend_layout">
                 <t t-name="ControllerDoctor">
                     <div class="container mb-5 mt-4 o_rating_page_submit">
-                        <div class="d-flex justify-content-center">
-                            <div class="col-2"/>
-                            <div class="col-6 justify-content-center">
-                                <h3 class="text-success justify-content-center">LISTA DE DOCTORES</h3>
-                            </div>
-                            <div class="col-4">
-                                <a href="/doctors" class="btn btn btn-outline-success btn-lg">Registrarte como Doctor
-                                </a>
-                            </div>
-                        </div>
-                        <div class="dropdown-divider m-0"/>
-                        <div class="dropdown-divider m-0"/>
+                        <t t-call="base_hospital_management.comment_template_header"/>
                         <div class="row justify-content-center">
                             <div class="col-12 col-md-8">
                                 <div class="list-group">
                                     <t t-foreach="employees" t-as="employee">
                                         <div class="list-group-item list-group-item-action">
-                                            <div class="row align-items-center">
-                                                <div class="col-4 col-md-3">
-                                                    <img t-att-src="image_data_uri(employee.avatar_1920)"
-                                                         style="max-height: 85pt; max-width: 100%;"/>
-                                                </div>
-                                                <div class="col-8 col-md-6">
-                                                    <h4 class="list-group-item-heading text-dark">
-                                                        <t t-esc="employee.name"/>
-                                                    </h4>
-                                                    <h5 class="list-group-item-heading">
-                                                        <t t-esc="employee.job_title"/>
-                                                    </h5>
-                                                    <span class="float-right " title="Rating" role="img"
-                                                          t-attf-aria-label="Rating: #{employee.average_rating} on 5">
-                                                        <t t-foreach="range(1, 6)" t-as="i">
-                                                            <span t-attf-class="text-warning o_priority_star fa fa-star#{'' if i &lt;= int(employee.average_rating) else '-o'}"/>
-                                                        </t>
-                                                    </span>
-                                                    <table class="table table-sm">
-                                                        <tr>
-                                                            <td>
-                                                                <i class="fa fa-address-card-o"></i>
-                                                                <span>Senecyt</span>
-                                                            </td>
-                                                            <td>
-                                                                <i class="fa fa-credit-card-alt"></i>
-                                                                <span>COD TRABAJO</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                <t t-esc="employee.title_registration"/>
-                                                            </td>
-                                                            <td>
-                                                                <t t-esc="employee.registration_number"/>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <ul class="list-group-item-text">
-                                                        <li>
-                                                            <i class="fa fa-envelope"></i>
-                                                            <t t-esc="employee.work_email"/>
-                                                        </li>
-                                                        <li>
-                                                            <i class="fa fa-phone"></i>
-                                                            <t t-esc="employee.mobile_phone"/>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <div class="col-12 col-md-3 text-right">
-                                                    <a t-attf-href="mailto:{{employee.work_email}}"
-                                                       class="btn btn-primary btn-sm">Enviar correo
-                                                    </a>
-                                                    <a t-attf-href="https://wa.me/{{employee.mobile_phone}}"
-                                                       class="btn btn-success btn-sm">WhatsApp
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <t t-if="employee.rating_ids">
-                                                <a href="#" class="toggle-comments-link float-left">Mostrar
-                                                    Comentarios
-                                                </a>
-                                                <div class="comments-container" style="display: none;">
-                                                    <table class="table table-sm">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Usuario</th>
-                                                                <th scope="col">Calificación</th>
-                                                                <th scope="col">Comentario</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <t t-foreach="employee.rating_ids" t-as="rating">
-                                                                <tr>
-                                                                    <td>
-                                                                        <t t-esc="rating.user_id.name"/>
-                                                                    </td>
-                                                                    <td>
-                                                                        <span class="float-right " title="Rating"
-                                                                              role="img"
-                                                                              t-attf-aria-label="Rating: #{rating.rating} on 5">
-                                                                            <t t-foreach="range(1, 6)" t-as="i">
-                                                                                <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
-                                                                            </t>
-                                                                        </span>
-                                                                    </td>
-                                                                    <td>
-                                                                        <t t-esc="rating.review"/>
-                                                                    </td>
-                                                                </tr>
-                                                            </t>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </t>
-                                            <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>
-                                            <div class="comments-form" style="display: none;">
-                                                <form id="comment-form" method="post" action="/create/comment">
-                                                    <input type="hidden" name="doctor_id" t-att-value="employee.id"/>
-                                                    <div class="form-group">
-                                                        <label for="rating">Calificación:</label>
-                                                        <div id="star-rating">
-                                                            <span class="fa text-waring fa-star-o"
-                                                                  data-rating="1"></span>
-                                                            <span class="fa text-waring fa-star-o"
-                                                                  data-rating="2"></span>
-                                                            <span class="fa text-waring fa-star-o"
-                                                                  data-rating="3"></span>
-                                                            <span class="fa text-waring fa-star-o"
-                                                                  data-rating="4"></span>
-                                                            <span class="fa text-waring fa-star-o"
-                                                                  data-rating="5"></span>
-                                                        </div>
-                                                        <input type="hidden" id="rating" value="0" name="rating"
-                                                               required=""/>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label for="comment">Comentario:</label>
-                                                        <input class="form-control" id="comment" name="comment" rows="3"
-                                                               required=""/>
-                                                    </div>
-                                                    <button type="submit" class="btn btn-primary">Enviar Comentario
-                                                    </button>
-                                                </form>
-                                            </div>
+                                            <t t-call="base_hospital_management.comment_template_data"/>
+                                            <t t-call="base_hospital_management.comment_template_list"/>
+                                            <t t-call="base_hospital_management.comment_template_create"/>
                                         </div>
                                     </t>
                                 </div>
