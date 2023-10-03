@@ -3,18 +3,25 @@
 
         <template id="comment_template_header" name="Header">
             <div class="d-flex justify-content-center">
-                <div class="col-2"/>
-                <div class="col-6 justify-content-center">
-                    <h3 class="text-success justify-content-center">LISTA DE DOCTORES</h3>
-                </div>
                 <div class="col-4">
-                    <a href="/doctors" class="btn btn btn-outline-success btn-lg">Registrarte como Doctor
-                    </a>
+                    <h4 class="text-success justify-content-center">PROFESIONALES</h4>
+                </div>
+                <div class="col-2"/>
+                <div class="col-6">
+                    <form class="form-inline" action="/web/doctors/search" method="get">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search_query" class="sr-only">Buscar:</label>
+                            <input type="text" class="form-control" id="search_query" name="search_query"
+                                   placeholder="Nombre o profesión"/>
+                        </div>
+                        <button type="submit" class="btn btn-success mb-2">Buscar</button>
+                    </form>
                 </div>
             </div>
             <div class="dropdown-divider m-0"/>
             <div class="dropdown-divider m-0"/>
         </template>
+
 
         <template id="comment_template_create" name="Crear Comentarios">
             <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>

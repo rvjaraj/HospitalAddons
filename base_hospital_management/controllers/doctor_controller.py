@@ -60,3 +60,17 @@ class DoctorController(http.Controller):
             return request.redirect('/web/doctors')
         else:
             return request.redirect('/')
+
+    @http.route('/web/doctors/search', type='http', auth="user", website=True)
+    def search_doctors(self, **kw):
+        search_query = kw.get('search_query')
+        domain = [('is_doctor', '=', 'doctor'), ('published', '=', True)]
+
+        if search_query:
+            domain += ['|', ('name', 'ilike', search_query), ('job_title', 'ilike', search_query)]
+
+        employees = request.env['hr.employee'].search(domain)
+
+        return request.render('base_hospital_management.doctor_kanban_template', {
+            'employees': employees,
+        })
