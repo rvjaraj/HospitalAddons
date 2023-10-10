@@ -120,7 +120,7 @@
                         <tr>
                             <td>
                                 <i class="fa fa-address-card-o"></i>
-                                <span>Senecyt</span>
+                                <span>Senescyt</span>
                             </td>
                             <td>
                                 <i class="fa fa-credit-card-alt"></i>
@@ -309,12 +309,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- # Registro Senecyt -->
+                                    <!-- # Registro Senescyt -->
                                     <div class="form-group col-10 s_website_form_field s_website_form_required">
                                         <div class="row s_col_no_resize s_col_no_bgcolor">
                                             <label class="col-form-label col-sm-auto s_website_form_label"
                                                    style="width: 200px">
-                                                <span class="s_website_form_label_content"># Registro Senecyt</span>
+                                                <span class="s_website_form_label_content"># Registro Senescyt</span>
                                                 <span class="s_website_form_mark">*</span>
                                             </label>
                                             <div class="col-sm">

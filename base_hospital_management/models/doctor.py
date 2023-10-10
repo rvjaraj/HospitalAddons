@@ -60,7 +60,7 @@ class HospitalDoctors(models.Model):
     prescription_ids = fields.One2many('hospital.prescription', 'pharmacy_id', 'Prescription')
     pharmacy_ids = fields.One2many('hospital.pharmacy', 'doctor_id', 'Pharmacy')
     published = fields.Boolean('Publicar?', default=False)
-    title_registration = fields.Char(string="# Registro Senecyt")
+    title_registration = fields.Char(string="# Registro Senescyt")
     registration_number = fields.Char(string="# Registro Trabajo")
 
     rating_ids = fields.One2many('doctor.rating', 'doctor_id', string='Ratings')
