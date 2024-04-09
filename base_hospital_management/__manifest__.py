@@ -33,7 +33,7 @@
     'website': "https://www.cybrosys.com",
     "license": "AGPL-3",
     'category': 'Hospital',
-    'version': '15.0.1.0.0',
+    'version': '17.0.1.0.0',
     'depends': ['base', 'hr', 'account', 'sale'],
     'data': [
         'security/ir.model.access.csv',

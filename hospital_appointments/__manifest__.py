@@ -34,7 +34,7 @@
     'website': "https://www.cybrosys.com",
     "license": "AGPL-3",
     'category': 'Website',
-    'version': '15.0.1.0.1',
+    'version': '17.0.1.0.1',
     'depends': ['website_sale', 'base_hospital_management'],
     'data': ['security/ir.model.access.csv',
              'reports/patient_card.xml',

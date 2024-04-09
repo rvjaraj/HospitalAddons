@@ -32,7 +32,7 @@
     'website': "https://www.cybrosys.com",
     "license": "AGPL-3",
     'category': 'Hospital',
-    'version': '15.0.1.0.0',
+    'version': '17.0.1.0.0',
     'depends': ['base', 'base_hospital_management', 'hr', 'hospital_cleaning_shifts', 'board',
                 ],
     'data': [
