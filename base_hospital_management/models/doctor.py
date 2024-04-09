@@ -23,6 +23,20 @@
 from odoo import models, fields, api
 
 
+class DoctorRating(models.Model):
+    _name = 'doctor.rating'
+    _description = 'Doctor Ratings'
+
+    doctor_id = fields.Many2one('hr.employee', string='Doctor', required=True)
+    user_id = fields.Many2one('res.users', string='User', required=True, default=lambda self: self.env.user)
+    rating = fields.Selection(
+        [('0', 'Very Low'), ('1', 'Low'), ('2', 'Normal'), ('3', 'Medio'), ('4', 'High'), ('5', 'High')],
+        string='Rating', required=True, default='0')
+    review = fields.Text(string='Review')
+
+    # _sql_constraints = [
+    #     ('unique_user_doctor', 'unique(doctor_id, user_id)', 'Solo puede haber una califiación por usuario y doctor'),
+    # ]
 
 
 class HospitalDoctors(models.Model):
