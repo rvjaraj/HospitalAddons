@@ -68,9 +68,10 @@ class HospitalDoctors(models.Model):
         [('0', 'Very Low'), ('1', 'Low'), ('2', 'Normal'), ('3', 'Medio'), ('4', 'High'), ('5', 'High')],
         string='Average Rating', compute='_compute_average_rating', store=True)
 
-    # @api.depends('rating_ids.rating')
-    # def _compute_average_rating(self):
-    #     for doctor in self:
+    @api.depends('rating_ids.rating')
+    def _compute_average_rating(self):
+        for doctor in self:
+            doctor.average_rating = '0'
     #         total_ratings = sum(int(rating.rating) for rating in doctor.rating_ids)
     #         if total_ratings:
     #             doctor.average_rating = str(int(total_ratings / len(doctor.rating_ids)))
