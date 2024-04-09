@@ -73,7 +73,7 @@
     ],
     'assets': {
         'web.assets_frontend': [
-            '/base_hospital_management/static/src/js/hospital.js',
+            # '/base_hospital_management/static/src/js/hospital.js',
         ],
     },
     'images': ['static/description/banner.png'],
