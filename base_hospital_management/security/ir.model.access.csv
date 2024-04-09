@@ -31,7 +31,7 @@ access_test_type,test.type,model_test_type,base.group_user,1,1,1,1
 access_hospital_labs,hospital.labs,model_hospital_labs,base.group_user,1,1,1,1
 access_test_test,test.test,model_test_test,base.group_user,1,1,1,1
 access_room_view,room.view,model_room_view,base.group_user,1,1,1,1
-
+access_doctor_rating,doctor.rating,model_doctor_rating,base.group_user,1,1,1,1
 
 
 

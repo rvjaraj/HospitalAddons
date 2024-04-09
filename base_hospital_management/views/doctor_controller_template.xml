@@ -1,0 +1,385 @@
+<odoo>
+    <data>
+
+        <template id="comment_template_header" name="Header">
+            <div class="d-flex justify-content-center">
+                <div class="col-4">
+                    <h4 class="text-success justify-content-center">PROFESIONALES</h4>
+                </div>
+                <div class="col-2"/>
+                <div class="col-6">
+                    <form class="form-inline" action="/web/doctors/search" method="get">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <label for="search_query" class="sr-only">Buscar:</label>
+                            <input type="text" class="form-control" id="search_query" name="search_query"
+                                   placeholder="Nombre o profesión"/>
+                        </div>
+                        <button type="submit" class="btn btn-success mb-2">Buscar</button>
+                    </form>
+                </div>
+            </div>
+            <div class="dropdown-divider m-0"/>
+            <div class="dropdown-divider m-0"/>
+        </template>
+
+
+        <template id="comment_template_create" name="Crear Comentarios">
+            <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>
+            <div class="dropdown-divider m-0"/>
+            <br/>
+            <div class="comments-form" style="display: none;">
+                <form id="comment-form" method="post" action="/create/comment">
+                    <input type="hidden" name="doctor_id" t-att-value="employee.id"/>
+                    <div class="form-group">
+                        <label for="rating">Calificación:</label>
+                        <span class="fa text-warning star-rating">
+                            <input type="hidden" class="rating" name="rating" value="0" required=""/>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="1"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="2"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="3"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="4"></span>
+                            <span class="fa text-waring fa-star-o"
+                                  data-rating="5"></span>
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label for="comment">Comentario:</label>
+                        <input class="form-control" id="comment" name="comment" rows="3"
+                               required=""/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Comentario
+                    </button>
+                </form>
+            </div>
+        </template>
+
+        <template id="comment_template_list" name="Listar Comentarios">
+            <t t-if="employee.rating_ids">
+                <a href="#" class="toggle-comments-link float-left">Mostrar
+                    Comentarios
+                </a>
+                <div class="comments-container" style="display: none;">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">Usuario</th>
+                                <th scope="col">Calificación</th>
+                                <th scope="col">Comentario</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="employee.rating_ids" t-as="rating">
+                                <tr>
+                                    <td>
+                                        <t t-esc="rating.user_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span class="float-right " title="Rating"
+                                              role="img"
+                                              t-attf-aria-label="Rating: #{rating.rating} on 5">
+                                            <t t-foreach="range(1, 6)" t-as="i">
+                                                <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
+                                            </t>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <t t-esc="rating.review"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <template id="comment_template_data" name="Datos Dotor">
+            <div class="row align-items-center">
+                <div class="col-4 col-md-3">
+                    <img t-att-src="image_data_uri(employee.avatar_1920)"
+                         style="max-height: 85pt; max-width: 100%;"/>
+                </div>
+                <div class="col-8 col-md-6">
+                    <h4 class="list-group-item-heading text-dark">
+                        <t t-esc="employee.name"/>
+                    </h4>
+                    <h5 class="list-group-item-heading">
+                        <t t-esc="employee.job_title"/>
+                    </h5>
+                    <span class="float-right " title="Rating" role="img"
+                          t-attf-aria-label="Rating: #{employee.average_rating} on 5">
+                        <t t-foreach="range(1, 6)" t-as="i">
+                            <span t-attf-class="text-warning o_priority_star fa fa-star#{'' if i &lt;= int(employee.average_rating) else '-o'}"/>
+                        </t>
+                    </span>
+                    <table class="table table-sm">
+                        <tr>
+                            <td>
+                                <i class="fa fa-address-card-o"></i>
+                                <span>Senescyt</span>
+                            </td>
+                            <td>
+                                <i class="fa fa-credit-card-alt"></i>
+                                <span>COD TRABAJO</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <t t-esc="employee.title_registration"/>
+                            </td>
+                            <td>
+                                <t t-esc="employee.registration_number"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <ul class="list-group-item-text">
+                        <li>
+                            <i class="fa fa-envelope"></i>
+                            <t t-esc="employee.work_email"/>
+                        </li>
+                        <li>
+                            <i class="fa fa-phone"></i>
+                            <t t-esc="employee.mobile_phone"/>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-3 text-right">
+                    <a t-attf-href="mailto:{{employee.work_email}}"
+                       class="btn btn-primary btn-sm">Enviar correo
+                    </a>
+                    <a t-attf-href="https://wa.me/{{employee.mobile_phone}}"
+                       class="btn btn-success btn-sm">WhatsApp
+                    </a>
+                </div>
+            </div>
+        </template>
+
+        <template id="doctor_kanban_template" name="Lista De Doctores">
+            <t t-call="web.frontend_layout">
+                <t t-name="ControllerDoctor">
+                    <div class="container mb-5 mt-4 o_rating_page_submit">
+                        <t t-call="base_hospital_management.comment_template_header"/>
+                        <div class="row justify-content-center">
+                            <div class="col-12 col-md-8">
+                                <div class="list-group">
+                                    <t t-foreach="employees" t-as="employee">
+                                        <div class="list-group-item list-group-item-action">
+                                            <t t-call="base_hospital_management.comment_template_data"/>
+                                            <t t-call="base_hospital_management.comment_template_list"/>
+                                            <t t-call="base_hospital_management.comment_template_create"/>
+                                        </div>
+                                    </t>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="controller_doctor_form" name="Registro Doctores">
+            <t t-call="web.frontend_layout">
+                <div id="request_doctor_form">
+                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+                        <div class="container">
+                            <form id="request_form" method="post" action="/create/doctors"
+                                  class="s_website_form_required">
+                                <div class="s_website_form_rows row s_col_no_bgcolor">
+                                    <!-- Información Personal -->
+                                    <div class="col-12">
+                                        <h2>Información Personal</h2>
+                                    </div>
+                                    <!-- Nombre -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Nombre</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="text" class="form-control s_website_form_input"
+                                                       name="doctor_name" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Titulo -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Titulo</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="text" class="form-control s_website_form_input"
+                                                       name="title" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Cédula/Pasaporte -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Cédula/Pasaporte</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="text" class="form-control s_website_form_input"
+                                                       name="identification_id" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Género -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Género</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <select name="gender" class="form-control link-style" required="">
+                                                    <option value="female">Female</option>
+                                                    <option value="male">Male</option>
+                                                    <option value="other">Others</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Información de Contacto -->
+                                    <div class="col-12">
+                                        <h2>Información de Contacto</h2>
+                                    </div>
+                                    <!-- # Celular -->
+                                    <div class="form-group col-10 s_website_form_field" data-type="char"
+                                         data-name="Field">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content"># Celular</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="tel" class="form-control s_website_form_input"
+                                                       name="phone"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Email -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required"
+                                         data-type="char" data-name="Field">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Email</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="email" type="email"
+                                                       class="form-control s_website_form_input" name="email"
+                                                       required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Información Adicional -->
+                                    <div class="col-12">
+                                        <h2>Información Adicional</h2>
+                                    </div>
+                                    <!-- Fecha de Nacimiento -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required"
+                                         data-type="char" data-name="Field">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content">Fecha de Nacimiento</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input id="appointment_date" type="date" name="birthday"
+                                                       class="form-control o_website_form_input o_website_form_date"
+                                                       required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- # Registro Senescyt -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content"># Registro Senescyt</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="text" class="form-control s_website_form_input"
+                                                       name="title_registration" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- # Registro Trabajo -->
+                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                        <div class="row s_col_no_resize s_col_no_bgcolor">
+                                            <label class="col-form-label col-sm-auto s_website_form_label"
+                                                   style="width: 200px">
+                                                <span class="s_website_form_label_content"># Registro Trabajo</span>
+                                                <span class="s_website_form_mark">*</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="text" class="form-control s_website_form_input"
+                                                       name="registration_number" required=""/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="form-group col-10 s_website_form_submit" data-name="Submit Button">
+                                        <div style="width: 200px;" class="s_website_form_label"/>
+                                        <a t-attf-href="'report/pdf/hospital_appointments.doctor_card/%s'%patient">
+                                            <button type="submit" class="btn btn-primary pull-left">Submit</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+
+        <template id="doctor_thanks" name="Doctor Registration Thanks">
+            <t t-call="web.frontend_layout">
+                <div class="container mt-5">
+                    <div class="row">
+                        <div class="col-md-6 offset-md-3">
+                            <div class="text-center">
+                                <h1>¡Gracias por registrarte como doctor!</h1>
+                                <p>Tu información se ha registrado correctamente.</p>
+                                <h2>Información del Doctor:</h2>
+                                <ul>
+                                    <li>Nombre:
+                                        <t t-esc="doctor.name"/>
+                                    </li>
+                                    <li>Título:
+                                        <t t-esc="doctor.job_title"/>
+                                    </li>
+                                    <!-- Puedes agregar más campos aquí -->
+                                </ul>
+                                <a class="btn btn-primary" href="/">Volver a la página principal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+
+    </data>
+</odoo>
