@@ -27,7 +27,7 @@ class Wards(models.Model):
     _description = 'Wards'
     _rec_name = 'ward_no'
 
-    ward_no = fields.Char(string="Ward Name", required="True")
+    ward_no = fields.Char(string="Ward Name", required=True)
     building_id = fields.Many2one('hospital.buildings', string="Block Name")
 
 

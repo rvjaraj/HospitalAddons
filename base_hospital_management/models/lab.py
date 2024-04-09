@@ -28,7 +28,7 @@ class Laboratory(models.Model):
     _rec_name = "test_seq"
 
     test_name = fields.Char('Test')
-    test_type = fields.Many2one('test.type', 'Test', required="True")
+    test_type = fields.Many2one('test.type', 'Test', required=True)
     date = fields.Date('Date')
     price = fields.Float(string='Price')
     currency_id = fields.Many2one('res.currency', 'Currency', default=lambda self: self.env.user.company_id
@@ -121,5 +121,5 @@ class TestTest(models.Model):
     _rec_name = 'test_name'
 
     test_name = fields.Char('Test')
-    test_type = fields.Many2one('test.type', 'Test Type', required="True")
+    test_type = fields.Many2one('test.type', 'Test Type', required=True)
     price = fields.Float('Price')

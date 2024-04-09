@@ -26,7 +26,7 @@ class TestType(models.Model):
     _name = 'test.type'
     _rec_name = 'type_name'
 
-    type_name = fields.Char('Test Type', required="True")
+    type_name = fields.Char('Test Type', required=True)
     test_type = fields.Selection([('range', 'Range'), ('objective', 'Objective')],
                                  string='Type', required=True, default='')
 

@@ -36,7 +36,7 @@ class Room(models.Model):
                                   .currency_id.id,
                                   required=True)
     building_id = fields.Many2one('hospital.buildings', string="Block Name",
-                                  required="True")
+                                  required=True)
     ward_id = fields.Many2one('hospital.wards', string="Ward No.",)
     rent = fields.Monetary(string='Rent')
     _sql_constraints = [('unique_room', 'unique (ward_no)',

@@ -27,7 +27,7 @@ class RoomFacility(models.Model):
     _description = 'Room Facilities'
     _rec_name = 'facilities'
 
-    facilities = fields.Text(string="Facilities", required="True")
+    facilities = fields.Text(string="Facilities", required=True)
 
 
 class WardFacility(models.Model):
@@ -35,5 +35,5 @@ class WardFacility(models.Model):
     _description = 'Ward Facilities'
     _rec_name = 'facilities'
 
-    facilities = fields.Text(string="Facilities", required="True")
+    facilities = fields.Text(string="Facilities", required=True)
 

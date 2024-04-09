@@ -27,7 +27,7 @@ class Degree(models.Model):
     _description = 'Degree'
     _rec_name = 'degree'
 
-    degree = fields.Char(string="Doctor's Degree", required="True")
+    degree = fields.Char(string="Doctor's Degree", required=True)
 
 
 class Specialization(models.Model):
@@ -36,7 +36,7 @@ class Specialization(models.Model):
     _rec_name = 'specialization'
 
     specialization = fields.Char(string="Doctor's Specialization",
-                                 required="True")
+                                 required=True)
 
 
 class Institution(models.Model):
@@ -44,4 +44,4 @@ class Institution(models.Model):
     _description = "Doctor's Institution"
     _rec_name = 'institution'
 
-    institution = fields.Char(string="Doctor's Institution", required="True")
+    institution = fields.Char(string="Doctor's Institution", required=True)

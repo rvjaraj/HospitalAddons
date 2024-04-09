@@ -26,7 +26,7 @@ class HospitalSurgery(models.Model):
     _name = 'hospital.operation'
     _rec_name = 'op_room_name'
 
-    op_room_name = fields.Char('Name', required="True")
+    op_room_name = fields.Char('Name', required=True)
     state = fields.Selection(
         [('free', 'Free'), ('reserved', 'Reserved'), ('occupied', 'Occupied'), ('unavailable', 'Not Available')],
         default='free')

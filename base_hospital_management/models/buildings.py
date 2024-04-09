@@ -27,7 +27,7 @@ class Buildings(models.Model):
     _description = 'Buildings'
     _rec_name = 'building_name'
 
-    building_name = fields.Char(string="Block", required="True")
+    building_name = fields.Char(string="Block", required=True)
     institution_id = fields.Many2one('hospital.hospital', string="Institution")
     notes = fields.Text()
 

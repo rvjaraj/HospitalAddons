@@ -7,9 +7,9 @@
             <form>
                 <header>
                     <field name="state" widget="statusbar"/>
-                    <button name="lab_button" type="object"  string="Start Test" states="draft"/>
-                    <button name="lab_button_end" type="object"  string="End Test" states="test,invoice"/>
-                    <button name="lab_button_payment" type="object"  string="Payment" states="test,complete"/>
+                    <button name="lab_button" type="object"  string="Start Test" invisible="state not in ('draft')"/>
+                    <button name="lab_button_end" type="object"  string="End Test" invisible="state not in ('test', 'invoice')"/>
+                    <button name="lab_button_payment" type="object"  string="Payment" invisible="state not in ('test', 'complete')"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -25,7 +25,7 @@
                         <group>
                             <field name="date"/>
                             <field name="currency_id"/>
-                            <field name="price" attrs="{'invisible': [('state','=','draft')]}"/>
+                            <field name="price" invisible="state == 'draft'"/>
                         </group>
                     </group>
                     <notebook>
@@ -34,9 +34,9 @@
                                 <tree editable="bottom" >
                                     <field name="test_sub_id" string="Tests" context="{'form_view_ref':'base_hospital_management.lab_test_form'}"/>
                                     <field name="lab_result_id" invisible="1"/>
-                                    <field name="result" attrs="{'invisible': [('parent.state','=','draft')]}" string='Result'/>
-                                    <field name="normal" string="Normal Range" attrs="{'invisible': [('parent.state','=','draft')]}"/>
-                                    <field name="unit" string="Unit" attrs="{'invisible': [('parent.state','=','draft')]}"/>
+                                    <field name="result" invisible="parent.state == 'draft'" string='Result'/>
+                                    <field name="normal" string="Normal Range" invisible="parent.state == 'draft'"/>
+                                    <field name="unit" string="Unit" invisible="parent.state == 'draft'"/>
                                 </tree>
                             </field>
                         </page>

@@ -28,7 +28,7 @@ class Lab(models.Model):
     _description = 'Lab'
     _rec_name = 'name'
 
-    name = fields.Char('Lab', required="True")
+    name = fields.Char('Lab', required=True)
     institution_id = fields.Many2one('hospital.hospital', string="Institution", required=True)
     building_id = fields.Many2one('hospital.buildings', 'Block', required=True)
     ward_no = fields.Many2one('hospital.wards', 'Ward', required=True)

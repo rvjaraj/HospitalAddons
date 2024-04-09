@@ -28,7 +28,7 @@ class Beds(models.Model):
     _description = 'Beds'
     _rec_name = 'bed_no'
 
-    bed_no = fields.Char(string="Bed No.", required="True")
+    bed_no = fields.Char(string="Bed No.", required=True)
     _sql_constraints = [('unique_room', 'unique (bed_no)',
                          'Bed number should be unique!')]
     bed_type = fields.Selection([('gatch', 'Gatch Bed'),

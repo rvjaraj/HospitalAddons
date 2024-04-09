@@ -280,7 +280,7 @@
                                 </group>
                             </group>
                         </page>
-                        <page string="Gynecology" attrs="{'invisible': [('gender', '!=', 'female')]}">
+                        <page string="Gynecology" invisible="gender != 'female'">
                             <group string="Gynecology">
                                 <group>
                                     <field name="fertile"/>

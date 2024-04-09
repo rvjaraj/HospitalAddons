@@ -34,7 +34,7 @@ class CleaningInspection(models.Model):
     cleaning_team = fields.Many2one('cleaning.teams')
     department_id = fields.Char()
     notes = fields.Text('Notes')
-    building_name = fields.Char(string="Block", required="True")
+    building_name = fields.Char(string="Block", required=True)
     cleaning_team_inspect_id = fields.One2many('cleaning.teams',
                                                'inverse_field_id')
     state = fields.Selection([('draft', 'Draft'), ('clean', 'Clean'),

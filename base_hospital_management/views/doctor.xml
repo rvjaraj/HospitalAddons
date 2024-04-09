@@ -29,20 +29,20 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='coach_id']" position="after">
                 <field name="currency_id" invisible="1"/>
-                <field name="consultancy_charge" attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>
-                <field name="consultancy_type" attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>
+                <field name="consultancy_charge" invisible="is_doctor != 'doctor'"/>
+                <field name="consultancy_type" invisible="is_doctor != 'doctor'"/>
             </xpath>
             <xpath expr="//field[@name='mobile_phone']" position="before">
                 <field name="is_doctor" widget="radio" options="{'horizontal': true}"/>
             </xpath>
             <xpath expr="//field[@name='certificate']" position="after">
-                <field name="degrees" widget="many2many_tags" attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>
-                <field name="institute" widget="many2many_tags" attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>
+                <field name="degrees" widget="many2many_tags" invisible="is_doctor != 'doctor'"/>
+                <field name="institute" widget="many2many_tags" invisible="is_doctor != 'doctor'"/>
                 <field name="specialization" widget="many2many_tags"
-                       attrs="{'invisible': [('is_doctor','!=','doctor')]}"/>
+                       invisible="is_doctor != 'doctor'"/>
             </xpath>
             <xpath expr="//page[@name='personal_information']" position="after">
-                <page name="prescription" string="Prescription" attrs="{'invisible': [('is_doctor','!=','doctor')]}">
+                <page name="prescription" string="Prescription" invisible="is_doctor != 'doctor'">
                     <field name="prescription_ids">
                         <tree editable="bottom" create="false">
                             <field name="pharmacy_id"/>

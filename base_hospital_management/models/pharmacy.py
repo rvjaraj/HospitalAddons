@@ -27,7 +27,7 @@ class Pharmacy(models.Model):
     _description = 'Pharmacy'
     _rec_name = 'pharmacy_name'
 
-    pharmacy_name = fields.Char(string="Pharmacy Name", required="True")
+    pharmacy_name = fields.Char(string="Pharmacy Name", required=True)
     pharmacist_name = fields.Many2one('hr.employee', string="Pharmacist's Name",
                                       domain=[('job_title', '=', 'Pharmacist')])
     health_center = fields.Many2one("hospital.hospital", 'Health Center')
@@ -83,7 +83,7 @@ class Prescription(models.Model):
                                    default=lambda self: 'New')
     unit_price = fields.Monetary("Unit Price",related = 'medicine_id.price')
     prescription_ids = fields.One2many('hospital.prescription.lines', 'prescription_id')
-    payment_id = fields.Many2one('hospital.payment', "Payment ")
+    # payment_id = fields.Many2one('hospital.payment', "Payment ")
     amount_total = fields.Monetary('Total', compute='_onchange_compute_amount_total')
 
     prescription_date = fields.Datetime('Date', default=fields.Datetime.now)

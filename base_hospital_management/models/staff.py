@@ -27,8 +27,7 @@ class Staff(models.Model):
     _description = 'Staff'
     department_id = fields.Many2one('hr.department', string="Department",
                                     )
-    staff_id = fields.Many2many('hr.employee', string="Staff",
-                                readonly='1')
+    staff_id = fields.Many2many('hr.employee', string="Staff", readonly=True)
     _rec_name = 'department_id'
 
     @api.onchange('department_id')
