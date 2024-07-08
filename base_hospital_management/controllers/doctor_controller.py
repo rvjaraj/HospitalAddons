@@ -18,7 +18,7 @@ class DoctorController(http.Controller):
 
     @http.route('/create/doctors', methods=['POST', 'GET'], type='http',
                 auth="public", website=True, csrf=False)
-    def submit_form(self, **kw):
+    def submit_create_doctors(self, **kw):
         """Taking appointment to doctor"""
         if kw:
             # Crear un nuevo doctor con los datos del formulario

@@ -185,7 +185,7 @@
         <template id="controller_doctor_form" name="Registro Doctores">
             <t t-call="web.frontend_layout">
                 <div id="request_doctor_form">
-                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">
+<!--                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">-->
                         <div class="container">
                             <form id="request_form" method="post" action="/create/doctors"
                                   class="s_website_form_required">
@@ -348,7 +348,7 @@
                                 </div>
                             </form>
                         </div>
-                    </section>
+<!--                    </section>-->
                 </div>
             </t>
         </template>
