@@ -58,7 +58,7 @@
                     </field>
                 </page>
                 <page string="Calificaciones">
-                    <field name="rating_ids">
+                    <field name="average_rating_ids">
                         <tree editable="bottom">
                             <field name="user_id"/>
                             <field name="rating" widget="priority"/>

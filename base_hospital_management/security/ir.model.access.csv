@@ -32,11 +32,6 @@ access_hospital_labs,hospital.labs,model_hospital_labs,base.group_user,1,1,1,1
 access_test_test,test.test,model_test_test,base.group_user,1,1,1,1
 access_room_view,room.view,model_room_view,base.group_user,1,1,1,1
 access_doctor_rating,doctor.rating,model_doctor_rating,base.group_user,1,1,1,1
-
-
-
-
-
-
-
-
+portal_access_doctor_rating,doctor.rating,model_doctor_rating,base.group_portal,1,1,1,1
+portal_hr_employee,hr.employee,model_hr_employee,base.group_portal,1,1,1,1
+portal_hr_employee_public,hr.employee_public,hr.model_hr_employee_public,base.group_portal,1,1,1,1

@@ -63,7 +63,7 @@ class HospitalDoctors(models.Model):
     title_registration = fields.Char(string="# Registro Senescyt")
     registration_number = fields.Char(string="# Registro Trabajo")
 
-    rating_ids = fields.One2many('doctor.rating', 'doctor_id', string='Ratings')
+    average_rating_ids = fields.One2many('doctor.rating', 'doctor_id', string='Ratings')
     average_rating = fields.Selection(
         [('0', 'Very Low'), ('1', 'Low'), ('2', 'Normal'), ('3', 'Medio'), ('4', 'High'), ('5', 'High')],
         string='Average Rating', compute='_compute_average_rating', store=True)
@@ -71,8 +71,8 @@ class HospitalDoctors(models.Model):
     @api.depends('rating_ids.rating')
     def _compute_average_rating(self):
         for doctor in self:
-            total_ratings = sum(int(rating.rating) for rating in doctor.rating_ids)
+            total_ratings = sum(int(rating.rating) for rating in doctor.average_rating_ids)
             if total_ratings:
-                doctor.average_rating = str(int(total_ratings / len(doctor.rating_ids)))
+                doctor.average_rating = str(int(total_ratings / len(doctor.average_rating_ids)))
             else:
                 doctor.average_rating = '0'

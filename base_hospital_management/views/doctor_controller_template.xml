@@ -58,7 +58,7 @@
         </template>
 
         <template id="comment_template_list" name="Listar Comentarios">
-            <t t-if="employee.rating_ids">
+            <t t-if="employee.average_rating_ids">
                 <a href="#" class="toggle-comments-link float-left">Mostrar
                     Comentarios
                 </a>
@@ -72,7 +72,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <t t-foreach="employee.rating_ids" t-as="rating">
+                            <t t-foreach="employee.average_rating_ids" t-as="rating">
                                 <tr>
                                     <td>
                                         <t t-esc="rating.user_id.name"/>
