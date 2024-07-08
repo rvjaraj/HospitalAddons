@@ -1,6 +1,6 @@
 <odoo>
     <data>
-
+        
         <template id="comment_template_header" name="Header">
             <div class="d-flex justify-content-center">
                 <div class="col-4">
@@ -21,82 +21,87 @@
             <div class="dropdown-divider m-0"/>
             <div class="dropdown-divider m-0"/>
         </template>
-
-
+        
+        
         <template id="comment_template_create" name="Crear Comentarios">
-            <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>
-            <div class="dropdown-divider m-0"/>
-            <br/>
-            <div class="comments-form" style="display: none;">
-                <form id="comment-form" method="post" action="/create/comment">
-                    <input type="hidden" name="doctor_id" t-att-value="employee.id"/>
-                    <div class="form-group">
-                        <label for="rating">Calificación:</label>
-                        <span class="fa text-warning star-rating">
-                            <input type="hidden" class="rating" name="rating" value="0" required=""/>
-                            <span class="fa text-waring fa-star-o"
-                                  data-rating="1"></span>
-                            <span class="fa text-waring fa-star-o"
-                                  data-rating="2"></span>
-                            <span class="fa text-waring fa-star-o"
-                                  data-rating="3"></span>
-                            <span class="fa text-waring fa-star-o"
-                                  data-rating="4"></span>
-                            <span class="fa text-waring fa-star-o"
-                                  data-rating="5"></span>
-                        </span>
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Comentario:</label>
-                        <input class="form-control" id="comment" name="comment" rows="3"
-                               required=""/>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Enviar Comentario
-                    </button>
-                </form>
+            
+            <div id="main_template_create" class="container">
+                <a href="#" class="toggle-create-link float-right">Agregar Comentario</a>
+                <div class="dropdown-divider m-0"/>
+                <br/>
+                <div class="comments-form" style="display: none;">
+                    <form id="comment-form" method="post" action="/create/comment">
+                        <input type="hidden" name="doctor_id" t-att-value="employee.id"/>
+                        <div class="form-group">
+                            <label for="rating">Calificación:</label>
+                            <span class="fa text-warning star-rating">
+                                <input type="hidden" class="rating" name="rating" value="0" required=""/>
+                                <span class="fa text-waring fa-star-o"
+                                      data-rating="1"></span>
+                                <span class="fa text-waring fa-star-o"
+                                      data-rating="2"></span>
+                                <span class="fa text-waring fa-star-o"
+                                      data-rating="3"></span>
+                                <span class="fa text-waring fa-star-o"
+                                      data-rating="4"></span>
+                                <span class="fa text-waring fa-star-o"
+                                      data-rating="5"></span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comentario:</label>
+                            <input class="form-control" id="comment" name="comment" rows="3"
+                                   required=""/>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar Comentario
+                        </button>
+                    </form>
+                </div>
             </div>
         </template>
-
+        
         <template id="comment_template_list" name="Listar Comentarios">
-            <t t-if="employee.average_rating_ids">
-                <a href="#" class="toggle-comments-link float-left">Mostrar
-                    Comentarios
-                </a>
-                <div class="comments-container" style="display: none;">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">Usuario</th>
-                                <th scope="col">Calificación</th>
-                                <th scope="col">Comentario</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="employee.average_rating_ids" t-as="rating">
+            <div id="main_template_show" class="container">
+                <t t-if="employee.average_rating_ids">
+                    <a href="#" class="toggle-comments-link float-left">Mostrar
+                        Comentarios
+                    </a>
+                    <div class="comments-container" style="display: none;">
+                        <table class="table table-sm">
+                            <thead>
                                 <tr>
-                                    <td>
-                                        <t t-esc="rating.user_id.name"/>
-                                    </td>
-                                    <td>
-                                        <span class="float-right " title="Rating"
-                                              role="img"
-                                              t-attf-aria-label="Rating: #{rating.rating} on 5">
-                                            <t t-foreach="range(1, 6)" t-as="i">
-                                                <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
-                                            </t>
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <t t-esc="rating.review"/>
-                                    </td>
+                                    <th scope="col">Usuario</th>
+                                    <th scope="col">Calificación</th>
+                                    <th scope="col">Comentario</th>
                                 </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                </div>
-            </t>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="employee.average_rating_ids" t-as="rating">
+                                    <tr>
+                                        <td>
+                                            <t t-esc="rating.user_id.name"/>
+                                        </td>
+                                        <td>
+                                            <span class="float-right " title="Rating"
+                                                  role="img"
+                                                  t-attf-aria-label="Rating: #{rating.rating} on 5">
+                                                <t t-foreach="range(1, 6)" t-as="i">
+                                                    <span t-attf-class="text-warning fa fa-star#{'' if i &lt;= int(rating.rating) else '-o'}"/>
+                                                </t>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <t t-esc="rating.review"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </div>
         </template>
-
+        
         <template id="comment_template_data" name="Datos Dotor">
             <div class="row align-items-center">
                 <div class="col-4 col-md-3">
@@ -157,7 +162,7 @@
                 </div>
             </div>
         </template>
-
+        
         <template id="doctor_kanban_template" name="Lista De Doctores">
             <t t-call="web.frontend_layout">
                 <t t-name="ControllerDoctor">
@@ -180,180 +185,180 @@
                 </t>
             </t>
         </template>
-
-
+        
+        
         <template id="controller_doctor_form" name="Registro Doctores">
             <t t-call="web.frontend_layout">
                 <div id="request_doctor_form">
-<!--                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">-->
-                        <div class="container">
-                            <form id="request_form" method="post" action="/create/doctors"
-                                  class="s_website_form_required">
-                                <div class="s_website_form_rows row s_col_no_bgcolor">
-                                    <!-- Información Personal -->
-                                    <div class="col-12">
-                                        <h2>Información Personal</h2>
-                                    </div>
-                                    <!-- Nombre -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Nombre</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="text" class="form-control s_website_form_input"
-                                                       name="doctor_name" required=""/>
-                                            </div>
+                    <!--                    <section class="s_website_form" data-vcss="001" data-snippet="s_website_form">-->
+                    <div class="container">
+                        <form id="request_form" method="post" action="/create/doctors"
+                              class="s_website_form_required">
+                            <div class="s_website_form_rows row s_col_no_bgcolor">
+                                <!-- Información Personal -->
+                                <div class="col-12">
+                                    <h2>Información Personal</h2>
+                                </div>
+                                <!-- Nombre -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Nombre</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input"
+                                                   name="doctor_name" required=""/>
                                         </div>
-                                    </div>
-                                    <!-- Titulo -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Titulo</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="text" class="form-control s_website_form_input"
-                                                       name="title" required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Cédula/Pasaporte -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Cédula/Pasaporte</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="text" class="form-control s_website_form_input"
-                                                       name="identification_id" required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Género -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Género</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <select name="gender" class="form-control link-style" required="">
-                                                    <option value="female">Female</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="other">Others</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Información de Contacto -->
-                                    <div class="col-12">
-                                        <h2>Información de Contacto</h2>
-                                    </div>
-                                    <!-- # Celular -->
-                                    <div class="form-group col-10 s_website_form_field" data-type="char"
-                                         data-name="Field">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content"># Celular</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="tel" class="form-control s_website_form_input"
-                                                       name="phone"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- Email -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required"
-                                         data-type="char" data-name="Field">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Email</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input id="email" type="email"
-                                                       class="form-control s_website_form_input" name="email"
-                                                       required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Información Adicional -->
-                                    <div class="col-12">
-                                        <h2>Información Adicional</h2>
-                                    </div>
-                                    <!-- Fecha de Nacimiento -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required"
-                                         data-type="char" data-name="Field">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content">Fecha de Nacimiento</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input id="appointment_date" type="date" name="birthday"
-                                                       class="form-control o_website_form_input"
-                                                       required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- # Registro Senescyt -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content"># Registro Senescyt</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="text" class="form-control s_website_form_input"
-                                                       name="title_registration" required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- # Registro Trabajo -->
-                                    <div class="form-group col-10 s_website_form_field s_website_form_required">
-                                        <div class="row s_col_no_resize s_col_no_bgcolor">
-                                            <label class="col-form-label col-sm-auto s_website_form_label"
-                                                   style="width: 200px">
-                                                <span class="s_website_form_label_content"># Registro Trabajo</span>
-                                                <span class="s_website_form_mark">*</span>
-                                            </label>
-                                            <div class="col-sm">
-                                                <input type="text" class="form-control s_website_form_input"
-                                                       name="registration_number" required=""/>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Submit Button -->
-                                    <div class="form-group col-10 s_website_form_submit" data-name="Submit Button">
-                                        <div style="width: 200px;" class="s_website_form_label"/>
-                                        <a t-attf-href="'report/pdf/hospital_appointments.doctor_card/%s'%patient">
-                                            <button type="submit" class="btn btn-primary pull-left">Submit</button>
-                                        </a>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
-<!--                    </section>-->
+                                <!-- Titulo -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Titulo</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input"
+                                                   name="title" required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Cédula/Pasaporte -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Cédula/Pasaporte</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input"
+                                                   name="identification_id" required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Género -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Género</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select name="gender" class="form-control link-style" required="">
+                                                <option value="female">Female</option>
+                                                <option value="male">Male</option>
+                                                <option value="other">Others</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Información de Contacto -->
+                                <div class="col-12">
+                                    <h2>Información de Contacto</h2>
+                                </div>
+                                <!-- # Celular -->
+                                <div class="form-group col-10 s_website_form_field" data-type="char"
+                                     data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content"># Celular</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="tel" class="form-control s_website_form_input"
+                                                   name="phone"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Email -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Email</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="email" type="email"
+                                                   class="form-control s_website_form_input" name="email"
+                                                   required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Información Adicional -->
+                                <div class="col-12">
+                                    <h2>Información Adicional</h2>
+                                </div>
+                                <!-- Fecha de Nacimiento -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required"
+                                     data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content">Fecha de Nacimiento</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="appointment_date" type="date" name="birthday"
+                                                   class="form-control o_website_form_input"
+                                                   required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- # Registro Senescyt -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content"># Registro Senescyt</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input"
+                                                   name="title_registration" required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- # Registro Trabajo -->
+                                <div class="form-group col-10 s_website_form_field s_website_form_required">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label"
+                                               style="width: 200px">
+                                            <span class="s_website_form_label_content"># Registro Trabajo</span>
+                                            <span class="s_website_form_mark">*</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input"
+                                                   name="registration_number" required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Submit Button -->
+                                <div class="form-group col-10 s_website_form_submit" data-name="Submit Button">
+                                    <div style="width: 200px;" class="s_website_form_label"/>
+                                    <a t-attf-href="'report/pdf/hospital_appointments.doctor_card/%s'%patient">
+                                        <button type="submit" class="btn btn-primary pull-left">Submit</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!--                    </section>-->
                 </div>
             </t>
         </template>
-
-
+        
+        
         <template id="doctor_thanks" name="Doctor Registration Thanks">
             <t t-call="web.frontend_layout">
                 <div class="container mt-5">
@@ -379,7 +384,7 @@
                 </div>
             </t>
         </template>
-
-
+    
+    
     </data>
 </odoo>
